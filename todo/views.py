@@ -4,10 +4,11 @@ from django.http import JsonResponse
 from .models import TodoItem
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 @api_view(["GET", "POST"])
 def index(request):
     if request.method=="POST":
-        title=request.POST.get("title")
+        title=request.data.get("title")
         item=TodoItem(title=title)
         item.save()
         return Response({"id":item.id,"title":item.title,"completed":item.completed})
@@ -22,7 +23,7 @@ def index(request):
 def update(request,id):
     item=TodoItem.objects.get(id=id)
     if request.method=="PUT":
-        title=request.POST.get("title")
+        title=request.data.get("title")
         item.title=title
         item.save()
         return Response({"id":item.id,"message":"updated"},status=200)
