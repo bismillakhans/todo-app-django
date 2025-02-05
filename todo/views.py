@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 # Create your views here.
-
+from .models import TodoItem
 
 def index(request):
     items=TodoItem.objects.all()
