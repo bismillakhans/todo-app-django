@@ -20,6 +20,6 @@ from todo.views import index,update
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('<int:id>', update),
+    path('<int:id>/', update),
 
 ]
