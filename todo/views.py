@@ -19,7 +19,7 @@ def index(request):
     return Response(tods)
 
 
-@api_view([ "PUT", "DELETE"])
+@api_view(["GET", "PUT", "DELETE"])
 def update(request,id):
     item=TodoItem.objects.get(id=id)
     if request.method=="PUT":
@@ -30,4 +30,6 @@ def update(request,id):
     if request.method=="DELETE":
         item.delete()
         return Response({"message":"deleted"},status=200)
+    
+    return Response({"id":item.id,"title":item.title,"completed":item.completed})
 
