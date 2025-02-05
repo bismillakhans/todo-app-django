@@ -15,7 +15,7 @@ def index(request):
     tods=[]
     for item in items:
         tods.append({"id":item.id,"title":item.title,"completed":item.completed})
-    return Response(tods,safe=False)
+    return Response(tods)
 
 
 @api_view([ "PUT", "DELETE"])
