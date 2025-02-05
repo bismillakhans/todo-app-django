@@ -4,4 +4,15 @@ from django.http import JsonResponse
 
 
 def index(request):
-    return JsonResponse({"message": "Hello, World!"})
+    items=TodoItem.objects.all()
+    tods=[]
+    for item in items:
+        tods.append({"id":item.id,"title":item.title,"completed":item.completed})
+    return JsonResponse(tods,safe=False)
+
+
+def create(request):
+    title=request.POST.get("title")
+    item=TodoItem(title=title)
+    item.save()
+    return JsonResponse({"message":"Item created","id":item.id})
